@@ -4,6 +4,7 @@ using CraveCultureResturant.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CraveCultureResturant.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250506185459_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -255,9 +258,6 @@ namespace CraveCultureResturant.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -279,7 +279,6 @@ namespace CraveCultureResturant.Data.Migrations
                             ProductId = 1,
                             CategoryId = 2,
                             Description = "Crispy rolls filled with vegetables",
-                            ImageUrl = "https://via.placeholder.com/150",
                             Name = "Spring Rolls",
                             Price = 2.50m,
                             Stock = 100
@@ -289,7 +288,6 @@ namespace CraveCultureResturant.Data.Migrations
                             ProductId = 2,
                             CategoryId = 1,
                             Description = "Spicy chicken curry with rice",
-                            ImageUrl = "https://via.placeholder.com/150",
                             Name = "Chicken Curry",
                             Price = 10.00m,
                             Stock = 50
@@ -299,7 +297,6 @@ namespace CraveCultureResturant.Data.Migrations
                             ProductId = 3,
                             CategoryId = 2,
                             Description = "Tender beef stir fry with vegetables",
-                            ImageUrl = "https://via.placeholder.com/150",
                             Name = "Beef Stir Fry",
                             Price = 12.00m,
                             Stock = 30
@@ -309,7 +306,6 @@ namespace CraveCultureResturant.Data.Migrations
                             ProductId = 4,
                             CategoryId = 3,
                             Description = "Fried rice with mixed vegetables",
-                            ImageUrl = "https://via.placeholder.com/150",
                             Name = "Vegetable Fried Rice",
                             Price = 8.00m,
                             Stock = 20
@@ -319,7 +315,6 @@ namespace CraveCultureResturant.Data.Migrations
                             ProductId = 5,
                             CategoryId = 4,
                             Description = "Rich chocolate cake with frosting",
-                            ImageUrl = "https://via.placeholder.com/150",
                             Name = "Chocolate Cake",
                             Price = 5.00m,
                             Stock = 15
@@ -329,7 +324,6 @@ namespace CraveCultureResturant.Data.Migrations
                             ProductId = 6,
                             CategoryId = 3,
                             Description = "Fresh salad with Caesar dressing",
-                            ImageUrl = "https://via.placeholder.com/150",
                             Name = "Caesar Salad",
                             Price = 6.00m,
                             Stock = 25
@@ -339,7 +333,6 @@ namespace CraveCultureResturant.Data.Migrations
                             ProductId = 7,
                             CategoryId = 2,
                             Description = "Grilled salmon with lemon butter sauce",
-                            ImageUrl = "https://via.placeholder.com/150",
                             Name = "Grilled Salmon",
                             Price = 15.00m,
                             Stock = 10
@@ -349,7 +342,6 @@ namespace CraveCultureResturant.Data.Migrations
                             ProductId = 8,
                             CategoryId = 5,
                             Description = "Sweet mango yogurt drink",
-                            ImageUrl = "https://via.placeholder.com/150",
                             Name = "Mango Lassi",
                             Price = 3.00m,
                             Stock = 40
@@ -359,7 +351,6 @@ namespace CraveCultureResturant.Data.Migrations
                             ProductId = 9,
                             CategoryId = 2,
                             Description = "Pasta with mixed vegetables",
-                            ImageUrl = "https://via.placeholder.com/150",
                             Name = "Pasta Primavera",
                             Price = 9.00m,
                             Stock = 35
@@ -369,7 +360,6 @@ namespace CraveCultureResturant.Data.Migrations
                             ProductId = 10,
                             CategoryId = 4,
                             Description = "Italian coffee-flavored dessert",
-                            ImageUrl = "https://via.placeholder.com/150",
                             Name = "Tiramisu",
                             Price = 7.00m,
                             Stock = 20
@@ -379,7 +369,6 @@ namespace CraveCultureResturant.Data.Migrations
                             ProductId = 11,
                             CategoryId = 1,
                             Description = "Spicy vegetable-filled pastry",
-                            ImageUrl = "https://via.placeholder.com/150",
                             Name = "Vegetable Samosa",
                             Price = 3.00m,
                             Stock = 50
@@ -389,7 +378,6 @@ namespace CraveCultureResturant.Data.Migrations
                             ProductId = 12,
                             CategoryId = 2,
                             Description = "Grilled chicken in creamy tomato sauce",
-                            ImageUrl = "https://via.placeholder.com/150",
                             Name = "Chicken Tikka Masala",
                             Price = 11.00m,
                             Stock = 40
@@ -399,7 +387,6 @@ namespace CraveCultureResturant.Data.Migrations
                             ProductId = 13,
                             CategoryId = 3,
                             Description = "Soft Indian bread with garlic",
-                            ImageUrl = "https://via.placeholder.com/150",
                             Name = "Garlic Naan",
                             Price = 2.00m,
                             Stock = 60
@@ -409,7 +396,6 @@ namespace CraveCultureResturant.Data.Migrations
                             ProductId = 14,
                             CategoryId = 4,
                             Description = "Creamy cheesecake with graham cracker crust",
-                            ImageUrl = "https://via.placeholder.com/150",
                             Name = "Cheesecake",
                             Price = 6.00m,
                             Stock = 30
@@ -419,7 +405,6 @@ namespace CraveCultureResturant.Data.Migrations
                             ProductId = 15,
                             CategoryId = 5,
                             Description = "Refreshing iced tea with lemon",
-                            ImageUrl = "https://via.placeholder.com/150",
                             Name = "Iced Tea",
                             Price = 2.50m,
                             Stock = 70
@@ -429,7 +414,6 @@ namespace CraveCultureResturant.Data.Migrations
                             ProductId = 16,
                             CategoryId = 2,
                             Description = "Mixed vegetables stir-fried with soy sauce",
-                            ImageUrl = "https://via.placeholder.com/150",
                             Name = "Vegetable Stir Fry",
                             Price = 7.00m,
                             Stock = 45
@@ -439,7 +423,6 @@ namespace CraveCultureResturant.Data.Migrations
                             ProductId = 17,
                             CategoryId = 3,
                             Description = "Fresh seasonal fruit salad",
-                            ImageUrl = "https://via.placeholder.com/150",
                             Name = "Fruit Salad",
                             Price = 4.00m,
                             Stock = 55
@@ -449,7 +432,6 @@ namespace CraveCultureResturant.Data.Migrations
                             ProductId = 18,
                             CategoryId = 4,
                             Description = "Light and airy chocolate dessert",
-                            ImageUrl = "https://via.placeholder.com/150",
                             Name = "Chocolate Mousse",
                             Price = 5.00m,
                             Stock = 25
