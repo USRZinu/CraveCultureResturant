@@ -56,7 +56,7 @@ namespace CraveCultureResturant.Data
                 { ProductId=1,
                     Name = "Spring Rolls",
                     Description = "Crispy rolls filled with vegetables",
-                    Price = 2.50m,
+                    Price = 70.00m,
                     Stock = 100,
                     CategoryId = 2
                 },
@@ -65,7 +65,7 @@ namespace CraveCultureResturant.Data
                     ProductId = 2,
                     Name = "Chicken Curry",
                     Description = "Spicy chicken curry with rice",
-                    Price = 10.00m,
+                    Price = 150.00m,
                     Stock = 50,
                     CategoryId = 1
                 },
@@ -74,7 +74,7 @@ namespace CraveCultureResturant.Data
                     ProductId = 3,
                     Name = "Beef Stir Fry",
                     Description = "Tender beef stir fry with vegetables",
-                    Price = 12.00m,
+                    Price = 250.00m,
                     Stock = 30,
                     CategoryId = 2
                 },
@@ -83,7 +83,7 @@ namespace CraveCultureResturant.Data
                     ProductId = 4,
                     Name = "Vegetable Fried Rice",
                     Description = "Fried rice with mixed vegetables",
-                    Price = 8.00m,
+                    Price = 165.00m,
                     Stock = 20,
                     CategoryId = 3
                 },
@@ -92,7 +92,7 @@ namespace CraveCultureResturant.Data
                     ProductId = 5,
                     Name = "Chocolate Cake",
                     Description = "Rich chocolate cake with frosting",
-                    Price = 5.00m,
+                    Price = 100.00m,
                     Stock = 15,
                     CategoryId = 4
                 },
@@ -101,7 +101,7 @@ namespace CraveCultureResturant.Data
                     ProductId = 6,
                     Name = "Caesar Salad",
                     Description = "Fresh salad with Caesar dressing",
-                    Price = 6.00m,
+                    Price = 170.00m,
                     Stock = 25,
                     CategoryId = 3
                 },
@@ -110,7 +110,7 @@ namespace CraveCultureResturant.Data
                     ProductId = 7,
                     Name = "Grilled Salmon",
                     Description = "Grilled salmon with lemon butter sauce",
-                    Price = 15.00m,
+                    Price = 315.00m,
                     Stock = 10,
                     CategoryId = 2
                 },
@@ -119,7 +119,7 @@ namespace CraveCultureResturant.Data
                     ProductId = 8,
                     Name = "Mango Lassi",
                     Description = "Sweet mango yogurt drink",
-                    Price = 3.00m,
+                    Price = 150.00m,
                     Stock = 40,
                     CategoryId = 5
                 },
@@ -128,7 +128,7 @@ namespace CraveCultureResturant.Data
                     ProductId = 9,
                     Name = "Pasta Primavera",
                     Description = "Pasta with mixed vegetables",
-                    Price = 9.00m,
+                    Price = 200.00m,
                     Stock = 35,
                     CategoryId = 2
                 },
@@ -137,7 +137,7 @@ namespace CraveCultureResturant.Data
                        ProductId = 10,
                        Name = "Tiramisu",
                        Description = "Italian coffee-flavored dessert",
-                       Price = 7.00m,
+                       Price = 265.00m,
                        Stock = 20,
                        CategoryId = 4
                    },
@@ -146,7 +146,7 @@ namespace CraveCultureResturant.Data
                        ProductId = 11,
                        Name = "Vegetable Samosa",
                        Description = "Spicy vegetable-filled pastry",
-                       Price = 3.00m,
+                       Price = 10.00m,
                        Stock = 50,
                        CategoryId = 1
                    },
@@ -155,7 +155,7 @@ namespace CraveCultureResturant.Data
                          ProductId = 12,
                          Name = "Chicken Tikka Masala",
                          Description = "Grilled chicken in creamy tomato sauce",
-                         Price = 11.00m,
+                         Price = 245.00m,
                          Stock = 40,
                          CategoryId = 2
                      },
@@ -164,7 +164,7 @@ namespace CraveCultureResturant.Data
                             ProductId = 13,
                             Name = "Garlic Naan",
                             Description = "Soft Indian bread with garlic",
-                            Price = 2.00m,
+                            Price = 80.00m,
                             Stock = 60,
                             CategoryId = 3
                         },
@@ -173,7 +173,7 @@ namespace CraveCultureResturant.Data
                             ProductId = 14,
                             Name = "Cheesecake",
                             Description = "Creamy cheesecake with graham cracker crust",
-                            Price = 6.00m,
+                            Price = 190.00m,
                             Stock = 30,
                             CategoryId = 4
                         },
@@ -182,7 +182,7 @@ namespace CraveCultureResturant.Data
                             ProductId = 15,
                             Name = "Iced Tea",
                             Description = "Refreshing iced tea with lemon",
-                            Price = 2.50m,
+                            Price = 45.00m,
                             Stock = 70,
                             CategoryId = 5
                         },
@@ -191,7 +191,7 @@ namespace CraveCultureResturant.Data
                             ProductId = 16,
                             Name = "Vegetable Stir Fry",
                             Description = "Mixed vegetables stir-fried with soy sauce",
-                            Price = 7.00m,
+                            Price = 160.00m,
                             Stock = 45,
                             CategoryId = 2
                         },
@@ -200,7 +200,7 @@ namespace CraveCultureResturant.Data
                             ProductId = 17,
                             Name = "Fruit Salad",
                             Description = "Fresh seasonal fruit salad",
-                            Price = 4.00m,
+                            Price = 120.00m,
                             Stock = 55,
                             CategoryId = 3
                         },
@@ -209,7 +209,7 @@ namespace CraveCultureResturant.Data
                             ProductId = 18,
                             Name = "Chocolate Mousse",
                             Description = "Light and airy chocolate dessert",
-                            Price = 5.00m,
+                            Price = 95.00m,
                             Stock = 25,
                             CategoryId = 4
                         }
