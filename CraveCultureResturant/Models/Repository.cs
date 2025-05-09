@@ -85,5 +85,10 @@ namespace CraveCultureResturant.Models
             return await query.ToListAsync();
 
         }
+
+        public Task<IEnumerable<T>> GetAllByAsync<TKey>(TKey id, string propertyName, QueryOptions<T> options)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

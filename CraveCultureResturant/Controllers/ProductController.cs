@@ -54,7 +54,6 @@ namespace CraveCultureResturant.Controllers
             ViewBag.Categories = await categories.GetAllAsync();
             if (ModelState.IsValid)
             {
-
                 if (product.ImageFile != null)
                 {
                     string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images");
@@ -69,13 +68,18 @@ namespace CraveCultureResturant.Controllers
 
                 if (product.ProductId == 0)
                 {
-
                     product.CategoryId = catId;
 
-                    //add ingredients
+                    // Initialize ProductIngredients if null
+                    if (product.ProductIngredients == null)
+                    {
+                        product.ProductIngredients = new List<ProductIngredient>();
+                    }
+
+                    // Add ingredients
                     foreach (int id in ingredientIds)
                     {
-                        product.ProductIngredients?.Add(new ProductIngredient { IngredientId = id, ProductId = product.ProductId });
+                        product.ProductIngredients.Add(new ProductIngredient { IngredientId = id, ProductId = product.ProductId });
                     }
 
                     await products.AddAsync(product);
@@ -100,10 +104,14 @@ namespace CraveCultureResturant.Controllers
                     existingProduct.CategoryId = catId;
 
                     // Update product ingredients
-                    existingProduct.ProductIngredients?.Clear();
+                    if (existingProduct.ProductIngredients == null)
+                    {
+                        existingProduct.ProductIngredients = new List<ProductIngredient>();
+                    }
+                    existingProduct.ProductIngredients.Clear();
                     foreach (int id in ingredientIds)
                     {
-                        existingProduct.ProductIngredients?.Add(new ProductIngredient { IngredientId = id, ProductId = product.ProductId });
+                        existingProduct.ProductIngredients.Add(new ProductIngredient { IngredientId = id, ProductId = product.ProductId });
                     }
 
                     try

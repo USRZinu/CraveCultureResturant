@@ -27,7 +27,7 @@ namespace CraveCultureResturant.Data
             // Configure the many-to-many relationship between Product and Ingredient
             modelBuilder.Entity<ProductIngredient>()
                 .HasOne(pi => pi.Product)
-                .WithMany(p => p.ProductsIngredients)
+                .WithMany(p => p.ProductIngredients)
                 .HasForeignKey(pi => pi.ProductId);
             modelBuilder.Entity<ProductIngredient>()
                 .HasOne(pi => pi.Ingredient)

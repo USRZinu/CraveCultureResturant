@@ -1,6 +1,4 @@
-﻿using System.Net.Http.Headers;
-
-namespace CraveCultureResturant.Models
+﻿namespace CraveCultureResturant.Models
 {
     public class OrderItem
     {
