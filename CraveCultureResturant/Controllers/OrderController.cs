@@ -9,83 +9,152 @@ namespace CraveCultureResturant.Controllers
 {
     public class OrderController : Controller
     {
-        private readonly ApplicationDbContext _context;
-        private Repository<Product> _products;
-        private Repository<Order> _orders;
-        private readonly UserManager<ApplicationUser> _userManager;
+            private readonly ApplicationDbContext _context;
+            private Repository<Product> _products;
+            private Repository<Order> _orders;
+            private readonly UserManager<ApplicationUser> _userManager;
 
-        public OrderController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
-        {
-            _context = context;
-            _userManager = userManager;
-            _products = new Repository<Product>(context);
-            _orders = new Repository<Order>(context);
-        }
-
-        [Authorize]
-        [HttpGet]
-        public async Task<IActionResult> Create()
-        {
-            // Split the complex statement into simpler steps to avoid ENC0046
-            var sessionModel = HttpContext.Session.Get<OrderViewModel>("OrderViewModel");
-            var products = await _products.GetAllAsync();
-
-            var model = sessionModel ?? new OrderViewModel
+            public OrderController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
             {
-                OrderItems = new List<OrderItemViewModel>(),
-                Products = products
-            };
-
-            return View(model);
-        }
-
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> AddItem(int prodId, int prodQty)
-        {
-            var product = await _context.Prouducts.FindAsync(prodId);
-            if (product == null)
-            {
-                return NotFound();
+                _context = context;
+                _userManager = userManager;
+                _products = new Repository<Product>(context);
+                _orders = new Repository<Order>(context);
             }
 
-            // Split the complex statement into simpler steps to avoid ENC0046
-            var sessionModel = HttpContext.Session.Get<OrderViewModel>("OrderViewModel");
-            var products = await _products.GetAllAsync();
-
-            var model = sessionModel ?? new OrderViewModel
+            [Authorize]
+            [HttpGet]
+            public async Task<IActionResult> Create()
             {
-                OrderItems = new List<OrderItemViewModel>(),
-                Products = products
-            };
+                //ViewBag.Products = await _products.GetAllAsync();
 
-            // Check if the product is already in the order
-            var existingItem = model.OrderItems.FirstOrDefault(oi => oi.ProductId == prodId);
-
-            // If the product is already in the order, update the quantity
-            if (existingItem != null)
-            {
-                existingItem.Quantity += prodQty;
-            }
-            else
-            {
-                model.OrderItems.Add(new OrderItemViewModel
+                //Retrieve or create an OrderViewModel from session or other state management
+                var model = HttpContext.Session.Get<OrderViewModel>("OrderViewModel") ?? new OrderViewModel
                 {
-                    ProductId = product.ProductId,
-                    Price = product.Price,
-                    Quantity = prodQty,
-                    ProductName = product.Name
-                });
+                    OrderItems = new List<OrderItemViewModel>(),
+                    Products = await _products.GetAllAsync()
+                };
+
+
+                return View(model);
             }
 
-            // Update the total amount
-            model.TotalAmount = model.OrderItems.Sum(oi => oi.Price * oi.Quantity);
+            [HttpPost]
+            [Authorize]
+            public async Task<IActionResult> AddItem(int prodId, int prodQty)
+            {
+                var product = await _context.Prouducts.FindAsync(prodId);
+                if (product == null)
+                {
+                    return NotFound();
+                }
 
-            // Save updated OrderViewModel to session
-            HttpContext.Session.Set("OrderViewModel", model);
+                // Retrieve or create an OrderViewModel from session or other state management
+                var model = HttpContext.Session.Get<OrderViewModel>("OrderViewModel") ?? new OrderViewModel
+                {
+                    OrderItems = new List<OrderItemViewModel>(),
+                    Products = await _products.GetAllAsync()
+                };
 
-            // Redirect back to Create to show updated order items
-            return RedirectToAction("Create", model);
+                // Check if the product is already in the order
+                var existingItem = model.OrderItems.FirstOrDefault(oi => oi.ProductId == prodId);
+
+                // If the product is already in the order, update the quantity
+                if (existingItem != null)
+                {
+                    existingItem.Quantity += prodQty;
+                }
+                else
+                {
+                    model.OrderItems.Add(new OrderItemViewModel
+                    {
+                        ProductId = product.ProductId,
+                        Price = product.Price,
+                        Quantity = prodQty,
+                        ProductName = product.Name
+                    });
+                }
+
+                // Update the total amount
+                model.TotalAmount = model.OrderItems.Sum(oi => oi.Price * oi.Quantity);
+
+                // Save updated OrderViewModel to session
+                HttpContext.Session.Set("OrderViewModel", model);
+
+                // Redirect back to Create to show updated order items
+                return RedirectToAction("Create", model);
+            }
+
+            [HttpGet]
+            [Authorize]
+            public async Task<IActionResult> Cart()
+            {
+
+                // Retrieve the OrderViewModel from session or other state management
+                var model = HttpContext.Session.Get<OrderViewModel>("OrderViewModel");
+
+                if (model == null || model.OrderItems.Count == 0)
+                {
+                    return RedirectToAction("Create");
+                }
+
+                return View(model);
+            }
+
+            [HttpPost]
+            [Authorize]
+            public async Task<IActionResult> PlaceOrder()
+            {
+                var model = HttpContext.Session.Get<OrderViewModel>("OrderViewModel");
+                if (model == null || model.OrderItems.Count == 0)
+                {
+                    return RedirectToAction("Create");
+                }
+
+                // Create a new Order entity
+                Order order = new Order
+                {
+                    OrderDate = DateTime.Now,
+                    TotalAmount = model.TotalAmount,
+                    UserId = _userManager.GetUserId(User)
+                };
+
+                // Add OrderItems to the Order entity
+                foreach (var item in model.OrderItems)
+                {
+                    order.OrderItems.Add(new OrderItem
+                    {
+                        ProductId = item.ProductId,
+                        Quantity = item.Quantity,
+                        Price = item.Price
+                    });
+                }
+
+                // Save the Order entity to the database
+                await _orders.AddAsync(order);
+
+                // Clear the OrderViewModel from session or other state management
+                HttpContext.Session.Remove("OrderViewModel");
+
+                // Redirect to the Order Confirmation page
+                return RedirectToAction("ViewOrders");
+            }
+
+            [HttpGet]
+            [Authorize]
+            public async Task<IActionResult> ViewOrders()
+            {
+                var userId = _userManager.GetUserId(User);
+
+                var userOrders = await _orders.GetAllByIdAsync(userId, "UserId", new QueryOptions<Order>
+                {
+                    Includes = "OrderItems.Product"
+                });
+
+                return View(userOrders);
+            }
+
+
+
         }
     }
-}
